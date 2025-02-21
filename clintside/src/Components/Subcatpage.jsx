@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useFetcher, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Url from '../../Url'
 const Subcatpage = () => {
@@ -21,16 +21,15 @@ const Subcatpage = () => {
                 setloading(false)
             }
         }
-
         fetchcat()
     }, [])
 
     const handleclick = (route) => {
         if (route.split("/")[1] == "all") {
-            navigate(`/products?category=${route.split("/")[0]}`)
+            navigate(`/products?category=${route.split("/")[0]}&page=1`)
         }
         else {
-            navigate(`/products?category=${route.split("/")[0]}&subcategory=${route.split("/")[1]}`)
+            navigate(`/products?category=${route.split("/")[0]}&subcategory=${route.split("/")[1]}&page=1`)
         }
     }
     if (error) {

@@ -30,7 +30,7 @@ const handleaddproduct = async (req, res) => {
             range: range
         });
 
-        // if any error 
+        
         if (!result) return res.status(500).json({ "Error": "Somthing went wrong Try After sometime" })
 
         // Sucessfully created
@@ -85,12 +85,20 @@ const handledeleteproduct = async (req, res) => {
 
 const handlGetProductList = async (req, res) => {
     try {
-        const param = req.query
+        const matchedCondition = {}
+        if(req.query?.category){
+            matchedCondition.category = req.query.category
+        }
+        if(req.query?.subcategory){
+            matchedCondition.subcategory = req.query.subcategory
+        }
+        
+        console.log(matchedCondition)
         let result = []
-        if (param.type === "feature"){
+        if (req.query.type === "feature"){
             result = await product.find({featured : true}).limit(12)
         }else{
-            result = await product.find(param)
+            result = await product.find(matchedCondition)
         }
         if (!result) return res.status(404).json({ "error": "No Product Found" });
         return res.status(200).json(

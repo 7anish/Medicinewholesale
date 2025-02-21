@@ -7,25 +7,39 @@ import { GoMoveToTop } from "react-icons/go";
 import Url from "../../Url";
 
 function ShopPage() {
-  const [searchparams] = useSearchParams();
+  const [searchparams , setSearchparams] = useSearchParams();
   const [data, setdata] = useState([]);
   const [error, seterror] = useState(false)
   const [loading, setloading] = useState(true)
   const [btntext, setbtntext] = useState('Load More')
-  const [lastindex, setlastindex] = useState(48)
-  const [firstindex , setfirstindex] = useState(0)
+  const [lastindex, setlastindex] = useState((+searchparams.get('page')));
+  const [firstindex , setfirstindex] = useState(+searchparams.get('page')-1);
 
   const forward = () => {
     setbtntext('Loading...')
     setfirstindex(lastindex)
     setlastindex(lastindex + 48)
-    setbtntext('Load More')
+    setbtntext('Load More');
+    window.scrollTo(0,0);
+
+    setSearchparams(searchparams => {
+      searchparams.set('page', (+searchparams.get('page')) + 1 );
+      return searchparams
+    });
   }
+
   const backward = ()=>{
     setbtntext('Loading...')
     setlastindex(firstindex)
     setfirstindex(firstindex - 48)
-    setbtntext('Load More')
+    setbtntext('Load More');
+    window.scrollTo(0,0);
+
+    console.log(firstindex , lastindex);
+    setSearchparams(searchparams => {
+      searchparams.set('page', (+searchparams.get('page')) - 1 );
+      return searchparams
+    });
   }
 
   useEffect(() => {
@@ -41,6 +55,7 @@ function ShopPage() {
         }
         const { data } = await axios.get(`${Url}/api/v1/med/getproduct?${url}`)
         setdata(data);
+        console.log(data.length)
         setloading(false)
       } catch (e) {
         seterror(true)
@@ -50,7 +65,7 @@ function ShopPage() {
     fetchdata()
   }, [])
 
-
+  console.log()
   if (error) {
     return (
       <>
@@ -72,7 +87,7 @@ function ShopPage() {
   return (
     <div className="">
       <DiscountShop />
-      <div className='w-12 h-12 rounded-full  bg-green-600 fixed bottom-10 right-3 sm:right-10 flex items-center justify-center cursor-pointer' onClick={(e) => window.scroll(0,0)}>
+      <div className='w-12 h-12 rounded-full  bg-green-600 fixed bottom-10 right-3 sm:right-10 flex items-center justify-center cursor-pointer z-50' onClick={(e) => window.scroll(0,0)}>
                       <GoMoveToTop className='text-2xl   font-extrabold' />
       </div>
 
@@ -115,7 +130,7 @@ function ShopPage() {
               <div className="w-full right-0">
                 <div className="w-full sm:px-10 flex flex-wrap justify-center items-center gap-2 sm:gap-10 py-5 sm:py-10">
                   {
-                    data.slice(firstindex, lastindex)?.map((item, index) => {
+                    data.slice(( firstindex*48), (lastindex *48))?.map((item, index) => {
                       return <ProductCard key={item.index} name={item.name} index={index} id={item.id} cat={item.category} subcat={item.subcategory} img={item.imageurl} actualprice={item.mrp} discountprice={item.ourPrice} companyname={item.companyName} size={item.size} heart={"yes"}  range={item.range} />
                     })
                   }
@@ -132,7 +147,7 @@ function ShopPage() {
                 ""
             }
             {
-              lastindex < data.length ?
+              lastindex*48 < data.length ?
                 <div className='sm:w-[150px] h-fit p-1 flex rounded-xl  bg-gray-300 font-bold transition-all duration-500    cursor-pointer justify-center items-center py-2 mx-auto my-5 float-right' onClick={() => forward()}>
                   <button className='w-full h-full text-sm sm:text-lg'>Next</button>
                 </div>
