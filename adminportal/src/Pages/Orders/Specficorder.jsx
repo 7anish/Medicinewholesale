@@ -112,13 +112,13 @@ const Specficorder = () => {
               Owner/Firm Name
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.name}
+              {order?.name}
             </td>
             <th scope="col" className="px-6 py-3 border border-gray-500">
               Email
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.email}
+              {order?.email}
             </td>
           </tr>
           <tr className='border border-gray-500'>
@@ -126,13 +126,13 @@ const Specficorder = () => {
               Phone Number
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.phoneNumber}
+              {order?.phoneNumber}
             </td>
             <th scope="col" className="px-6 py-3 border border-gray-500">
               Address
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.address}
+              {order?.address}
             </td>
           </tr>
           <tr className='border border-gray-500'>
@@ -140,13 +140,13 @@ const Specficorder = () => {
               City
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.city}
+              {order?.city}
             </td>
             <th scope="col" className="px-6 py-3 border border-gray-500">
               Pincode
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.pincode}
+              {order?.pincode}
             </td>
           </tr>
           <tr className='border border-gray-500'>
@@ -154,13 +154,13 @@ const Specficorder = () => {
               Drug Licence Number
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.druglcnumber}
+              {order?.druglcnumber}
             </td>
             <th scope="col" className="px-6 py-3 border border-gray-500">
               Food Licence Number
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.foodlcnumber}
+              {order?.foodlcnumber}
             </td>
           </tr>
           <tr className='border border-gray-500'>
@@ -168,13 +168,13 @@ const Specficorder = () => {
               Land Mark
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.landmark}
+              {order?.landmark}
             </td>
             <th scope="col" className="px-6 py-3 border border-gray-500">
               Order status
             </th>
-            <td scope="col" className={`px-6 py-3 border border-gray-500 font-bold ${order.OrderStatus === "Pending" ? 'text-yellow-500' : order.OrderStatus === "Delivered" ? 'text-green-600' : 'text-red-700'}`}>
-              {order.OrderStatus}
+            <td scope="col" className={`px-6 py-3 border border-gray-500 font-bold ${order?.OrderStatus === "Pending" ? 'text-yellow-500' : order.OrderStatus === "Delivered" ? 'text-green-600' : 'text-red-700'}`}>
+              {order?.OrderStatus}
             </td>
           </tr>
           <tr className='border border-gray-500'>
@@ -182,13 +182,13 @@ const Specficorder = () => {
               Remark
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              {order.remark}
+              {order?.remark}
             </td>
             <th scope="col" className="px-6 py-3 border border-gray-500">
               Delivery charges
             </th>
             <td scope="col" className="px-6 py-3 border border-gray-500">
-              ₹ {order.delivery}
+              ₹ {order?.delivery}
             </td>
           </tr>
         </table>
@@ -198,7 +198,7 @@ const Specficorder = () => {
               Total Billing Amount
             </th>
             <th scope="col" className="px-6 py-3 border border-gray-500 text-xl font-bold border-t-0">
-              ₹ {order.totalPrice}
+              ₹ {order?.totalPrice}
             </th>
           </tr>
         </table>
@@ -226,19 +226,19 @@ const Specficorder = () => {
                 return (
                   <tr key={index}>
                     <th scope="col" className="px-6 py-3 border border-gray-500  font-bol">
-                      {product.productId.name}
+                      {product?.productId?.name}
                     </th>
                     <th scope="col" className="px-6 py-3 border border-gray-500  font-bold">
-                      {product.productId.size}
+                      {product?.productId?.size}
                     </th>
                     <th scope="col" className="px-6 py-3 border border-gray-500  font-bol">
-                      {product.productId.mrp}
+                      {product?.productId?.mrp}
                     </th>
                     <th scope="col" className="px-6 py-3 border border-gray-500  font-bold">
-                      {product.productId.ourPrice}
+                      {product?.productId?.ourPrice}
                     </th>
                     <th scope="col" className="px-6 py-3 border border-gray-500  font-bold">
-                      {product.quantity}
+                      {product?.quantity}
                     </th>
                   </tr>
                 )

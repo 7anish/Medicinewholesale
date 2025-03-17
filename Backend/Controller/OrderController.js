@@ -132,20 +132,21 @@ const handlegettodaysorder =  async (req,res) => {
 
         result.map((order)=>{
             order.orders.map((product)=>{
-                if(dataarr.find((item) => item.id === product.productId._id)){
+                console.log(product)
+                if(dataarr.find((item) => item.id === product?.productId?._id)){
                     dataarr.map((fd)=>{
-                        if(fd.id ===  product.productId._id){
-                            fd.quantity += product.quantity;
+                        if(fd.id ===  product?.productId?._id){
+                            fd.quantity += product?.quantity;
                         }
                     })
                 }else{
                     const obj = {
-                        id : product.productId._id,
-                        name : product.productId.name,
-                        inventory : product.productId.inventory,
-                        ourPrice : product.productId.ourPrice,
-                        mrp : product.productId.mrp,
-                        quantity : product.quantity,
+                        id : product?.productId?._id,
+                        name : product?.productId?.name,
+                        inventory : product?.productId?.inventory,
+                        ourPrice : product?.productId?.ourPrice,
+                        mrp : product?.productId?.mrp,
+                        quantity : product?.quantity,
                     }
                     dataarr.push(obj)
                 }
