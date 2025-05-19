@@ -20,7 +20,7 @@ const About = () => {
                         </h2>
                         <p class="text-gray-700">
                             From essential medications to personal care items, we offer the right products for quicker recovery and better well-being. Trust us for quality health care essentials and stay supported on your path to wellness!
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nam unde, itaque quis tempore corporis earum. Nemo quod, dignissimos officia distinctio soluta accusantium mollitia molestiae architecto qui adipisci quaerat nobis? Pariatur dolorum accusantium nesciunt aliquid quisquam neque enim iste velit suscipit, ad nulla in alias odit odio consectetur reprehenderit omnis?
+                            Lorem ipsum dolor sit amet medicine wholesale, consectetur adipisicing elit. Iure nam unde, itaque quis tempore corporis earum. Nemo quod, dignissimos officia distinctio soluta accusantium mollitia molestiae architecto qui adipisci quaerat nobis? Pariatur dolorum accusantium nesciunt aliquid quisquam neque enim iste velit suscipit, ad nulla in alias odit odio consectetur reprehenderit omnis?
                         </p>
                     </div>
                 </div>
