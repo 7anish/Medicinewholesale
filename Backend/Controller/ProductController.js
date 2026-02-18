@@ -74,7 +74,7 @@ const handleupdateproduct = async (req, res) => {
 const handledeleteproduct = async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await product.findByIdAndDelete(id);
+        const result = await product.findByIdAndUpdate(id, { isDeleted: true })
         if (!result) return res.status(404).json({ "error": "Error in deleting the Product" });
         return res.status(200).json({ "Message": "Product Deleted Sucessfully" });
     } catch (e) {
@@ -96,11 +96,12 @@ const handlGetProductList = async (req, res) => {
         console.log(matchedCondition)
         let result = []
         if (req.query.type === "feature"){
-            result = await product.find({featured : true}).limit(12)
+            result = await product.find({featured : true , isDeleted : false}).limit(12)
         }else{
-            result = await product.find(matchedCondition)
+            result = await product.find({...matchedCondition , isDeleted : false})
         }
         if (!result) return res.status(404).json({ "error": "No Product Found" });
+
         return res.status(200).json(
             result.map((item) => {
                 const data = {
@@ -146,7 +147,7 @@ const handleGetSpecficProduct = async (req, res) => {
 
 const handlesearchlist = async (req,res)=>{
     try {
-        const  result = await product.find({})
+        const  result = await product.find({isDeleted : false})
         if (!result) return res.status(404).json({ "error": "No Product Found" });
         return res.status(200).json(
             result.map((item) => {

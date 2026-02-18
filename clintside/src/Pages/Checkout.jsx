@@ -8,6 +8,7 @@ import { Cookies } from 'react-cookie';
 const Checkout = () => {
     const cookie = new Cookies()
     const [isprocess, setisprocess] = useState(false)
+    const [paymentSelected, setPaymentSelected] = useState(false)
     const navigate = useNavigate()
     const [detail, setdetail] = useState({
         name: "",
@@ -103,8 +104,6 @@ const Checkout = () => {
             city: e.target.city.value,
             pincode: e.target.pincode.value,
             landmark: e.target.landmark.value,
-            foodlcnumber: e.target.foodlcnumber.value,
-            druglcnumber: e.target.druglcnumber.value,
             remark: e.target.remark.value,
             delivery: data.totaldiscountprice > 999 ? "0" : "50",
             totalPrice: data.totaldiscountprice > 999 ? data.totaldiscountprice : ((+data.totaldiscountprice) + 50),
@@ -140,6 +139,11 @@ const Checkout = () => {
         if (!checkothers(e.target.city.value)) {
             setisprocess(false)
             Swal.fire("Plese enter a city")
+            return
+        }
+        if (!paymentSelected) {
+            setisprocess(false)
+            Swal.fire("Please select a payment method")
             return
         }
         try {
@@ -229,15 +233,9 @@ const Checkout = () => {
                                     <input type="text" name='phoneNumber' className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="991331xxx" required value={detail.phoneNumber} onChange={(e) => handlechange(e)} />
                                 </div>
 
-                                <div>
-                                    <label for="your_email" className="mb-2 block text-sm font-medium text-gray-900 ">Drug Licence Number </label>
-                                    <input type="text" name='druglcnumber' className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="Drug Licence Number" value={detail.druglcnumber} onChange={(e) => handlechange(e)} />
-                                </div>
+                                
 
-                                <div>
-                                    <label for="your_email" className="mb-2 block text-sm font-medium text-gray-900 ">Food Licence Number </label>
-                                    <input type="text" name='foodlcnumber' className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500" placeholder="Food Licence Number" value={detail.foodlcnumber} onChange={(e) => handlechange(e)} />
-                                </div>
+                                
 
                                 <div>
                                     <label for="your_email" className="mb-2 block text-sm font-medium text-gray-900 "> Address* </label>
@@ -265,6 +263,34 @@ const Checkout = () => {
 
                             </div>
                         </div>
+
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-semibold text-gray-900">Payment Option<span className="text-red-500">*</span></h2>
+                            <div className="w-full">
+                                <label className={`block w-full rounded-lg border-2 p-4 text-sm cursor-pointer transition-all ${
+                                    paymentSelected 
+                                        ? 'border-green-500 bg-green-50' 
+                                        : 'border-gray-300 bg-gray-50 hover:border-green-300'
+                                }`}>
+                                    <div className="flex items-center gap-3">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={paymentSelected}
+                                            onChange={(e) => setPaymentSelected(e.target.checked)}
+                                            className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500"
+                                        />
+                                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                        <span className={`font-semibold ${
+                                            paymentSelected ? 'text-green-700' : 'text-gray-700'
+                                        }`}>Cash on Delivery (COD)</span>
+                                    </div>
+                                    <p className="mt-2 text-gray-600 text-xs ml-7">Pay with cash when your order is delivered</p>
+                                </label>
+                            </div>
+                        </div>
+
                         <div className="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md ">
                             <div className="flow-root">
                                 <div className="-my-3 divide-y divide-gray-200">

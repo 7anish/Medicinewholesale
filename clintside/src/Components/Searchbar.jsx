@@ -48,13 +48,17 @@ const Searchbar = ({ data, fun }) => {
                                 ""
                                 :
                                 filterData.slice(0, 10).map((item, index) => (
-                                    <p
+                                    <div
                                         key={index}
-                                        className={`text-black cursor-pointer p-1 bg-gray-50`}
-                                        onMouseDown={() => handlesearch(item.name)}
+                                        className={`text-black cursor-pointer p-1 bg-gray-50 hover:bg-gray-200`}
+                                        onMouseDown={(e) => {
+                                            e.preventDefault()
+                                            setOpen(false)
+                                            navigate(`/search?search=${item.name}`)
+                                        }}
                                     >
                                         {item.name}
-                                    </p>
+                                    </div>
                                 ))}
                     </div>
                 )}

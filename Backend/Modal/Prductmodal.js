@@ -66,6 +66,10 @@ const productScheam = new mongoose.Schema({
     featured : {
         type : Boolean,
         default : false
+    },
+    isDeleted : {
+        type : Boolean,
+        default : false
     }
 })
 

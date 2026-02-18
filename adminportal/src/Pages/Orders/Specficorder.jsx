@@ -156,9 +156,7 @@ const Specficorder = () => {
             <td scope="col" className="px-6 py-3 border border-gray-500">
               {order?.druglcnumber}
             </td>
-            <th scope="col" className="px-6 py-3 border border-gray-500">
-              Food Licence Number
-            </th>
+            
             <td scope="col" className="px-6 py-3 border border-gray-500">
               {order?.foodlcnumber}
             </td>
@@ -192,7 +190,8 @@ const Specficorder = () => {
             </td>
           </tr>
         </table>
-        <table className="w-full text-sm text-left rtl:text-right text-gray-700 border-0 border-t-0 border-gray-500 overflow-scroll scrollbar">
+        
+        <table className="w-full text-sm text-left rtl:text-right text-gray-700 border-0 border-t-0 border-gray-500 overflow-scroll scrollbar mb-8">
           <tr>
             <th colSpan={3} scope="col" className="px-6 py-3 border border-gray-500 text-xl font-bol text-right border-t-0">
               Total Billing Amount
@@ -202,10 +201,14 @@ const Specficorder = () => {
             </th>
           </tr>
         </table>
-        <table className="w-full text-sm text-gray-700  border  border-gray-500 border-t-0 overflow-scroll scrollbar">
+
+        <table className="w-full text-sm text-gray-700  border  border-gray-500  overflow-scroll scrollbar">
           <tr>
             <th scope="col" className="px-6 py-3  border-gray-500  font-bol  border-t-0">
               Product Name
+            </th>
+            <th scope="col" className="px-6 py-3 border border-gray-500  font-bold border-t-0">
+              Item Type
             </th>
             <th scope="col" className="px-6 py-3 border border-gray-500  font-bold border-t-0">
               Size
@@ -227,6 +230,9 @@ const Specficorder = () => {
                   <tr key={index}>
                     <th scope="col" className="px-6 py-3 border border-gray-500  font-bol">
                       {product?.productId?.name}
+                    </th>
+                    <th scope="col" className="px-6 py-3 border border-gray-500  font-bol">
+                      {product?.productId?.itemtype}
                     </th>
                     <th scope="col" className="px-6 py-3 border border-gray-500  font-bold">
                       {product?.productId?.size}
